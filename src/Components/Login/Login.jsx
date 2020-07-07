@@ -1,33 +1,49 @@
+// Import segala hal yang di butuhkan
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 function Login() {
-    const [name, setName] = useState("");
-    const [password, setPassword] = useState("");
+    // deklarsikan useHistory dan userlogin yang berisi objek
+    const history = useHistory();
+    const [userLogin, setUserLogin] = useState({
+        email: "",
+        password: "",
+    });
 
     // FUNCTION
 
-    const handleSubmit = () => {
-        localStorage.setItem("name", name);
-        localStorage.setItem("password", password);
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        if (userLogin.email !== "" && userLogin.password !== "") {
+            localStorage.setItem("userLogin", JSON.stringify(userLogin));
+            history.push("/pokemon");
+        }
+    };
+
+    const handleChange = (event) => {
+        setUserLogin({
+            ...userLogin,
+            [event.target.name]: event.target.value,
+        });
     };
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <label htmlFor="text">Username</label>
+                <label htmlFor="email">Username</label>
                 <input
-                    name="user"
-                    id="text"
+                    name="email"
+                    id="email"
                     type="text"
-                    value={name}
-                    onChange={(event) => setName(event.target.value)}
+                    value={userLogin.email}
+                    onChange={handleChange}
                 />
-                <label htmlFor="text" value={password}>
-                    Password
-                </label>
+                <label htmlFor="password">Password</label>
                 <input
                     name="password"
+                    id="password"
                     type="password"
-                    onChange={(event) => setPassword(event.target.value)}
+                    value={userLogin.password}
+                    onChange={handleChange}
                 />
                 <input type="submit" value="kirim" />
             </form>

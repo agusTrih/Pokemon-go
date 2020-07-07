@@ -29,10 +29,7 @@ transition: 0.3s;
 const SectionOne = Styled.section`
 align-self: center;
 `;
-const SectionTwo = Styled.section`
-display:flex;
-justify-content: center;
-`;
+
 const Image = Styled.img`
 `;
 const TextCenter = Styled.h2`
@@ -58,9 +55,6 @@ font-weight: bold;
 const FlexRow = Styled.div`
 display: flex;
 flex-direction: row;
-`;
-const FlexPersen = Styled.div`
-width: 50%;
 `;
 
 function PokemonDetail() {
